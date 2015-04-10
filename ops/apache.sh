@@ -10,6 +10,8 @@ then
     sudo a2enmod rewrite
 
     #sed -i '/AllowOverride None/c AllowOverride All' /etc/apache2/sites-available/default
+	# Use sed to add AllowOverride All to default config.
+	sudo sed -i '/DocumentRoot \/var\/www\/html/c DocumentRoot \/var\/www\/html \n\n\<Directory \/var\/www\/html \>\nAllowOverride All\n \<\/Directory\> ' /etc/apache2/sites-available/000-default.conf
 
 	sudo mv /vagrant/env_config/envvars /etc/apache2/envvars
 	sudo chown vagrant /var/lock/apache2
